@@ -1,0 +1,66 @@
+{
+  "technical_specs": {
+    "aspect_ratio": {
+      "value": "16:9 / 9:16",
+      "explanation": "Horisontal (16:9) og vertikal (9:16) videoformat støttes. Velg format etter kanal og brukssituasjon."
+    },
+    "audiolevel": {
+      "value": "-23 +/- 1 LUFS/LKFS",
+      "explanation": "Standardisert lydnivå for konsistent opplevelse. Dette sikrer at lydvolumet ikke oppleves for høyt eller lavt."
+    },
+    "dimensjoner": {
+      "value": "1080p / 720p",
+      "explanation": "Støttede oppløsninger for HD-kvalitet. 1080p anbefales for best kvalitet, men 720p aksepteres."
+    },
+    "filmlengde": {
+      "value": "6 sekunder, 15 sekunder, 15+ sekunder",
+      "explanation": "Non-Skip 6 sekunder kan ha en lengre sekundlengde, men det er mulig for brukeren å skippe etter 6 sekunder. Non-Skip 15 sekunder kan ha en lengre sekundlengde, men det er mulig for brukeren å skippe etter 15 sekunder"
+    },
+    "filtype": {
+      "value": ".mp4 / VAST",
+      "explanation": "Støttede videoformater for optimal kompatibilitet. Bruk .mp4 for direkte opplasting og VAST for tredjepartslevering."
+    },
+    "framerate": {
+      "value": "25fps",
+      "explanation": "Standard bilderate for jevn avspilling. 25 bilder per sekund er bransjestandard i Norge."
+    },
+    "kodek": {
+      "value": "H264",
+      "explanation": "Standard videokodek for beste kompresjon og kvalitet. H264 sikrer bred støtte på tvers av plattformer."
+    },
+    "maks_storrelse": {
+      "value": "500MB",
+      "explanation": "Maksimal filstørrelse for optimal lasting og distribusjon. Filer over 500MB kan avvises."
+    },
+    "safezones": {
+      "value": "Vertikal: 20% / Horisontal: 10%",
+      "explanation": "For å sikre at viktig innhold er synlig på alle skjermer og plattformer, må det plasseres innenfor en definert safe zone. For vertikal video (9:16) er safe zone 20% av høyde og bredde (20vw) langs alle kanter. For horisontal video (16:9) er safe zone 10% av høyde og bredde (10vw). Eksempel for 1080x1920: 216px marginer. Eksempel for 1920x1080: 192px høyde, 384px bredde. Dette forhindrer at tekst og grafikk blir kuttet ved visning."
+    }
+  },
+  "normative_info": {
+    "advantages": [
+      "Sikrer at alle annonser følger norske bransjestandarder.",
+      "Reduserer risiko for avviste annonser på grunn av tekniske feil.",
+      "Gir bedre videokvalitet og brukeropplevelse.",
+      "Sparer tid for både annonsører og publisister.",
+      "Bygger tillit mellom mediehus, byråer og annonsører."
+    ],
+    "best_practices": [
+      "Sjekk alltid annonsen mot de nyeste spesifikasjonene før opplasting.",
+      "Bruk anbefalt kodek og lydnivå for best resultat.",
+      "Hold viktig innhold innenfor safe zone for å sikre synlighet på alle plattformer.",
+      "Optimaliser filstørrelse for rask lasting og distribusjon."
+    ],
+    "product_description": "Norgespecs™ er bransjestandarden for videoannonse-spesifikasjoner i Norge, brukt og anbefalt av ledende mediehus og organisasjoner."
+  },
+  "chatbot_guidelines": {
+    "costar": {
+      "context": "Du er Norgespecs™ Assistenten, ekspert på norske videoannonse-spesifikasjoner.",
+      "objective": "Hjelpe brukere å forstå og følge tekniske og normative krav for videoannonser.",
+      "style": "Vennlig, konsis og profesjonell. Svar alltid på norsk.",
+      "tone": "Hjelpsom, tydelig og støttende.",
+      "audience": "Annonsører, mediebyråer og publisister i Norge.",
+      "response": "Gi alltid handlingsrettet, korrekt og oppdatert informasjon. Henvis til offisielle spesifikasjoner ved usikkerhet."
+    }
+  }
+} 

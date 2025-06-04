@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Velkommen til Norgespecs™{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">Velkommen til Norgespecs™</h1>
+        <!-- Media Logos Row -->
+        <div class="logo-row mb-2">
+            <div class="logo-list">
+                <img src="{{ url_for('static', filename='img/logoer_medier/schibsted.png') }}" alt="Schibsted" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_medier/amedia.png') }}" alt="Amedia" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_medier/aller.png') }}" alt="Aller" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_medier/polaris.png') }}" alt="Polaris" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_medier/tv2.jpg') }}" alt="TV2" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_medier/dn.jpg') }}" alt="DN" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_medier/hegnar') }}" alt="Hegnar" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_medier/she.jpg') }}" alt="SHE" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_medier/mentor.jpeg') }}" alt="Mentor" class="logo-img">
+            </div>
+        </div>
+        <!-- Organization Logos Row -->
+        <div class="logo-row mb-4">
+            <div class="logo-list">
+                <img src="{{ url_for('static', filename='img/logoer_organisasjoner/mbl.jpg') }}" alt="MBL" class="logo-img">
+                <img src="{{ url_for('static', filename='img/logoer_organisasjoner/anfo.png') }}" alt="ANFO" class="logo-img">
+            </div>
+        </div>
+        <!-- Image Carousel -->
+        <div class="carousel-container mb-5">
+            <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ url_for('static', filename='img/carousel1.jpg') }}" class="d-block w-100" alt="Slide 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='img/carousel2.jpg') }}" class="d-block w-100" alt="Slide 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='img/carousel3.jpg') }}" class="d-block w-100" alt="Slide 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ url_for('static', filename='img/carousel4.jpg') }}" class="d-block w-100" alt="Slide 4">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="visually-hidden">Forrige</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="visually-hidden">Neste</span>
+                </button>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Chatbot Section (ChatGPT style) -->
+<section class="chatgpt-section">
+    <div class="container chatgpt-container">
+        <div class="chatgpt-prompt text-center mb-4">
+            <h2 class="chatgpt-title">Hva lurer du på?</h2>
+            <p class="chatgpt-subtitle">Spør Norgespecs™ Assistenten om alt innen videoannonsering</p>
+        </div>
+        <div class="chatgpt-chat-window" id="chatMessages">
+            <div class="chatgpt-message bot-message">
+                <div class="chatgpt-avatar bot-avatar"><i class="fas fa-robot"></i></div>
+                <div class="chatgpt-bubble bot-bubble">
+                    Hei! Jeg er Norgespecs™ Assistenten. Spør meg om tekniske spesifikasjoner, formater, lyd, safe zones og mer!
+                </div>
+            </div>
+        </div>
+        <div class="chatgpt-input-row mt-3">
+            <div class="chatgpt-tools-btn" title="Verktøy (ikke aktiv)"><i class="fas fa-plus"></i></div>
+            <div class="chatgpt-input-group flex-grow-1">
+                <input type="text" class="form-control chatgpt-input" id="chatInput" placeholder="Skriv ditt spørsmål her..." onkeypress="handleKeyPress(event)">
+            </div>
+            <button class="chatgpt-mic-btn" title="Mikrofon (ikke aktiv)"><i class="fas fa-microphone"></i></button>
+            <button class="chatgpt-send-btn" type="button" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let isLoading = false;
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+function scrollToBottom() {
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function typeMessage(element, text) {
+    let index = 0;
+    element.textContent = '';
+    
+    function type() {
+        if (index < text.length) {
+            element.textContent += text.charAt(index);
+            index++;
+            // Adjust typing speed here - lower number = faster typing
+            setTimeout(type, 20);
+        }
+    }
+    type();
+}
+
+async function sendMessage() {
+    if (isLoading) return;
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (!message) return;
+    const chatMessages = document.getElementById('chatMessages');
+    
+    // Add user message
+    const userDiv = document.createElement('div');
+    userDiv.className = 'chatgpt-message user-message';
+    userDiv.innerHTML = `
+        <div class="chatgpt-avatar user-avatar"><i class="fas fa-user"></i></div>
+        <div class="chatgpt-bubble user-bubble">${message}</div>
+    `;
+    chatMessages.appendChild(userDiv);
+    input.value = '';
+    
+    // Add thinking indicator with bouncing dots
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'chatgpt-message bot-message';
+    loadingDiv.innerHTML = `
+        <div class="chatgpt-avatar bot-avatar"><i class="fas fa-robot"></i></div>
+        <div class="chatgpt-bubble bot-bubble">
+            Tenker<div class="thinking-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    `;
+    chatMessages.appendChild(loadingDiv);
+    scrollToBottom();
+    isLoading = true;
+    
+    try {
+        // Ensure minimum 1 second thinking time
+        const [response] = await Promise.all([
+            fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            }),
+            new Promise(resolve => setTimeout(resolve, 1000))
+        ]);
+        
+        const data = await response.json();
+        chatMessages.removeChild(loadingDiv);
+        
+        // Add bot response with typing animation
+        const botDiv = document.createElement('div');
+        botDiv.className = 'chatgpt-message bot-message';
+        botDiv.innerHTML = `
+            <div class="chatgpt-avatar bot-avatar"><i class="fas fa-robot"></i></div>
+            <div class="chatgpt-bubble bot-bubble"><span class="response-text"></span></div>
+        `;
+        chatMessages.appendChild(botDiv);
+        
+        // Start typing animation
+        const responseText = botDiv.querySelector('.response-text');
+        typeMessage(responseText, data.response);
+        
+    } catch (error) {
+        chatMessages.removeChild(loadingDiv);
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'chatgpt-message bot-message';
+        errorDiv.innerHTML = `
+            <div class="chatgpt-avatar bot-avatar"><i class="fas fa-robot"></i></div>
+            <div class="chatgpt-bubble bot-bubble">Beklager, det oppstod en feil. Prøv igjen senere.</div>
+        `;
+        chatMessages.appendChild(errorDiv);
+    }
+    
+    isLoading = false;
+    scrollToBottom();
+}
+</script>
+{% endblock %} 
